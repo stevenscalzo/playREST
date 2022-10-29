@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "6231e8cd-8369-487f-93d0-ac777f1a0670",
+		"name": "playREST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllGames",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/juegos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"juegos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGamesFilteredByAge",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/juegos?anyo=9",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"juegos"
+					],
+					"query": [
+						{
+							"key": "anyo",
+							"value": "9"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getGamesFilteredByTypeAndAge",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/juegos?anyo=4&tipo=familia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"juegos"
+					],
+					"query": [
+						{
+							"key": "anyo",
+							"value": "4"
+						},
+						{
+							"key": "tipo",
+							"value": "familia"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "postNewGame",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\"id\": 4,\"nombre\": \"juego 4\",\"descripcion\": \"Juego numero 4\",\"edad_minima\": 4,\"numero_jugadores\": 2,\"tipo\": \"familia\",\"precio\": \"19€\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/juegos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"juegos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "putGame",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n    \"id\": 4,\n    \"nombre\": \"juego 4\",\n    \"descripcion\": \"Juego numero 4\",\n    \"edad_minima\": 15,\n    \"numero_jugadores\": 2,\n    \"tipo\": \"familia\",\n    \"precio\": \"29€\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/juegos/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"juegos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteGame",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/juegos/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"juegos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
