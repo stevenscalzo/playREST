@@ -2,31 +2,31 @@ var fs = require('fs');
 var path = require("path");
 
 function cargarJuegos(file) {
-    let games = [];
+    let juegos = [];
     let pathDir = path.resolve(__dirname, file);
          
     if(!fs.existsSync(pathDir)) {
-        return games;
+        return juegos;
     }
 
     try {
-        games = JSON.parse(fs.readFileSync(pathDir, 'utf-8'));  
+        juegos = JSON.parse(fs.readFileSync(pathDir, 'utf-8'));  
     } catch(err) {
         console.error(err)
     }
 
-    return games;
+    return juegos;
 }
 
-function guardarJuegos(file, game) {
+function guardarJuegos(file, juegos) {
 
-    if (game.length === 0) {
+    if (juegos.length === 0) {
         return;
     }
 
     let pathDir = path.resolve(__dirname, file);
 
-    fs.writeFileSync(pathDir, JSON.stringify(game));
+    fs.writeFile(pathDir, JSON.stringify(juegos));
 }
 
 module.exports = {

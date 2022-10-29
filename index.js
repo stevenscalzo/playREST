@@ -3,9 +3,7 @@ const utilidades = require('./utilidades');
 const file = "games.json";
 
 let juegos = utilidades.cargarJuegos(file);
-
 let app = express();
-
 
 app.get('/juegos', (req, res) => {
     let data = juegos;
@@ -33,6 +31,30 @@ app.get('/juegos/:id', (req, res) => {
 
 app.get('/', (req, res) => {
     res.send("Bienvenido/a");
+});
+
+app.post('/juegos', (req, res) => {
+
+    if(juegos.filter(juego => juego.id = req.body.id)) {
+        res.status(400).send({ok: false, error: "Código de juego repetido"});
+        return;
+    }
+
+    let nuevoJuego = {
+        id: req.body.id,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        edad_minima: req.body.edad_minima ,
+        numero_jugadores: req.body.numero_jugadores ,
+        tipo: req.body.tipo ,
+        precio: req.body.precio 
+    };
+
+    juegos.push(nuevoJuego);
+    utilidades.guardarJuegos(file, juegos)
+
+    res.status(200).send({ok: true, juego: nuevoJuego});
+
 });
 
 app.listen(8080);
