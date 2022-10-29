@@ -3,7 +3,7 @@
         "id": 1,
         "nombre": "juego 1",
         "descripcion": "Juego numero 1",
-        "edad_minima": "8 años",
+        "edad_minima": 8,
         "numero_jugadores": 4,
         "tipo": "rol",
         "precio": "13€"
@@ -12,7 +12,7 @@
         "id": 2,
         "nombre": "juego 2",
         "descripcion": "Juego numero 2",
-        "edad_minima": "16 años",
+        "edad_minima": 16,
         "numero_jugadores": 16,
         "tipo": "fichas",
         "precio": "27€"
