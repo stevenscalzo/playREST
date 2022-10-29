@@ -1,9 +1,12 @@
 const express = require('express');
 const utilidades = require('./utilidades');
+var bodyParser = require('body-parser')
 const file = "games.json";
 
 let juegos = utilidades.cargarJuegos(file);
 let app = express();
+
+app.use(bodyParser.json())
 
 app.get('/juegos', (req, res) => {
     let data = juegos;
@@ -35,7 +38,7 @@ app.get('/', (req, res) => {
 
 app.post('/juegos', (req, res) => {
 
-    if(juegos.filter(juego => juego.id = req.body.id)) {
+    if(juegos.filter(juego => juego.id == req.body.id).length > 0) {
         res.status(400).send({ok: false, error: "Código de juego repetido"});
         return;
     }
@@ -57,6 +60,47 @@ app.post('/juegos', (req, res) => {
 
 });
 
+app.put('/juegos/:id', (req, res) => {
+    let indice = juegos.findIndex(juego => juego.id == req.params['id']);
+
+    if(indice == -1) {
+        res.status(400).send({ok: false, error: "Juego no encontrado"});
+        return;
+    }
+
+    juegos[indice] = {
+        id: juegos[indice].id,
+        nombre: req.body.nombre,
+        descripcion: req.body.descripcion,
+        edad_minima: req.body.edad_minima ,
+        numero_jugadores: req.body.numero_jugadores ,
+        tipo: req.body.tipo ,
+        precio: req.body.precio 
+    };
+
+    utilidades.guardarJuegos(file, juegos)
+
+    res.status(200).send({ok: true, juego: juegos[indice]});
+
+});
+
+app.delete('/juegos/:id', (req, res) => {
+    let indice = juegos.findIndex(juego => juego.id == req.params['id']);
+
+    if(indice == -1) {
+        res.status(400).send({ok: false, error: "Juego no encontrado"});
+        return;
+    }
+
+    juegoBorrar = juegos[indice];
+    juegos.splice(indice, 1);
+
+    utilidades.guardarJuegos(file, juegos)
+
+    res.status(200).send({ok: true, juego: juegoBorrar});
+
+});
+
 app.listen(8080);
 
 function enviarDatosServicio(res, data, mensaje400, mensaje500) {
@@ -71,7 +115,7 @@ function enviarDatosServicio(res, data, mensaje400, mensaje500) {
 
 function aplicarFiltros(req, data) {
     if (req.query.anyo) {
-        data = data.filter(juego => juego.edad_minima <= req.query.anyo);
+        data = data.filter(juego => juego.edad_minima >= req.query.anyo);
     }
 
     if (req.query.tipo) {

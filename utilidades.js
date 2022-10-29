@@ -26,7 +26,7 @@ function guardarJuegos(file, juegos) {
 
     let pathDir = path.resolve(__dirname, file);
 
-    fs.writeFile(pathDir, JSON.stringify(juegos));
+    fs.writeFileSync(pathDir, JSON.stringify(juegos));
 }
 
 module.exports = {
