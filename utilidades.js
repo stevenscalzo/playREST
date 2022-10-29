@@ -1,5 +1,15 @@
+const fs = require('fs');
+
 function cargarJuegos(file) {
-    return file;
+    let games = [];
+          
+    try {
+        games = require(file);
+    } catch(err) {
+        console.error(err)
+    }
+
+    return games;
 }
 
 function guardarJuegos(file, game) {

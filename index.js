@@ -1,7 +1,9 @@
 const express = require('express');
 const utilidades = require('./utilidades');
-const file = "games.json";
+const file = "./games.json";
 
-let app = express();
+let juegos = utilidades.cargarJuegos(file);
+juegos.forEach(element => console.log(element));
+//let app = express();
 
-app.listen(8080);
+//app.listen(8080);
